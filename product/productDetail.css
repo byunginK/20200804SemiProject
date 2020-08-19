@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+.tempMenu li{
+	list-style-type: none;
+	display: inline;
+	outline: 1px dotted red;
+	margin-right: 20px;
+}
+.wrapper{
+	float: left;
+}
+.img1{
+	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+	width: 400px;
+	height: 545px;
+	float: left; 
+	padding-right: 10px; 
+	margin-left: 480px;
+}
+
+.div1{
+	margin-left: 400px;
+	width: 300px;
+	border-bottom: 1px solid;
+}
+.div2{
+	 
+	margin-left: 400px; 
+	margin-top: 10px; 
+	width: 300px;
+}
+.div3{
+	
+	margin-left: 400px; 
+	margin-top: 10px; 
+	width: 300px;
+	height: 70px;
+}
+.detailInfo li{
+	list-style-type: none;
+	float: left;
+}
+.detailInfo li button{
+	width: 200px;
+	height: 50px;
+	background: none;
+	outline: none;
+	border: none;
+}
+#review{
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+}
+.tb2 th{
+	background-color: #95A5A6;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	text-align: center;
+	height:50px;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+}
+.tb2 tr{
+	height: 50px;
+}
+.tb2 td{
+	padding-left: 20px;
+	height:50px;
+	background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+}
+
+.paginglist li{
+	list-style-type: none;
+	display: inline-block;
+}
+#reviewTb{
+	border-collapse: collapse; 
+}
+#p_btn{
+	 font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+}
+#n_btn{
+	 font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+}
