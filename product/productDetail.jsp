@@ -31,10 +31,7 @@ if (session.getAttribute("login_Dto") != null) {
 <head>
 <meta charset="UTF-8">
 <title>ProductDetail</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="./product/productDetail.css"
-	type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- bootstrap core css -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 <!--slick slider stylesheet -->
@@ -46,54 +43,7 @@ if (session.getAttribute("login_Dto") != null) {
 <link href="css/font-awesome.min.css" rel="stylesheet" />
 <!-- Custom styles for this template -->
 <link href="css/style.css" rel="stylesheet" />
-<style type="text/css">
-#reviewTb {
-	border-collapse: collapse;
-}
 
-#p_btn {
-	font-size: 16px;
-	font-weight: bold;
-	background: gray;
-	border: none;
-	color: white;
-	border-radius: 2px;
-}
-
-#n_btn {
-	font-size: 16px;
-	font-weight: bold;
-	background: gray;
-	border: none;
-	color: white;
-	border-radius: 2px;
-}
-
-#review_btn {
-	font-size: 16px;
-	font-weight: bold;
-	background: gray;
-	border: none;
-	color: white;
-	border-radius: 2px;
-}
-
-#tableheader th {
-	background-color: #95A5A6;
-	font-size: 14px;
-	text-transform: uppercase;
-	letter-spacing: 0.03em;
-	text-align: center;
-}
-.rvf{
-	height:50px;
-	background-color: #ffffff;
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
-}
-.rvf td{
-	padding-left: 10px;
-}
-</style>
 </head>
 
 <body onload="func()">
@@ -115,7 +65,7 @@ if (session.getAttribute("login_Dto") != null) {
 						<div class="collapse navbar-collapse " id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item active"><a class="nav-link"
-									href="index.jsp">Main<span class="sr-only"></span></a></li>
+									href="addPro?work=main">Main<span class="sr-only"></span></a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="addPro?work=list">카테고리</a></li>
 								<!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
@@ -171,251 +121,269 @@ if (session.getAttribute("login_Dto") != null) {
 			</header>
 			<!-- 헤더 끝 -->
 
-			<!-- 메인 컨텐츠 자리 -->
 
-			<main>
-				<div align="center" style="margin-top: 100px">
 
-					<!-- DB의 카테고리 값을 이용하여 분류 -->
 
-					<%
-						if (product.getP_category().equals("top")) {
-					%>
-					<h1>Top & Outer</h1>
-					<%
-						} else if (product.getP_category().equals("bottom")) {
-					%>
-					<h1>Pants & Skirts</h1>
-					<%
-						} else if (product.getP_category().equals("shoes")) {
-					%>
-					<h1>Shoes</h1>
-					<%
-						} else if (product.getP_category().equals("accessary")) {
-					%>
-					<h1>Accesary</h1>
-					<%
-						}
-					%>
-				</div>
-				<hr>
-				<div align="center" style="margin-top: 100px">
 
-					<!-- 큰 이미지 -->
 
-					<div class="img1">
-						<img alt="이미지 없음" src="productimg/<%=product.getFilename()%>"
-							width="400px" height="545px">
-					</div>
 
-					<!-- 상품 이름 -->
 
-					<div class="div1" style="border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;">
-					<br>
-						<h2><%=product.getP_name()%></h2>
-						<%if(product.getP_readcount()>= 1){
-						%>
-						<p style="color: white; font-size: 13px; background: red; width: 200px"><b>주목 폭주</b></p>
+
+
+
+<!-- 제품상세 시작 -->
+   <section class="detail_section layout_padding">
+      <div class="container_padding">
+
+
+
+
+	<main>
+		<div align="center" style="margin-top: 100px" class="heading_detail">
+
+			<!-- DB의 카테고리 값을 이용하여 분류 -->
+
+			<%
+				if (product.getP_category().equals("top")) {
+			%>
+			<h1>Top & Outer</h1>
+			<%
+				} else if (product.getP_category().equals("bottom")) {
+			%>
+			<h1>Pants & Skirts</h1>
+			<%
+				} else if (product.getP_category().equals("shoes")) {
+			%>
+			<h1>Shoes</h1>
+			<%
+				} else if (product.getP_category().equals("accessary")) {
+			%>
+			<h1>Accesary</h1>
+			<%
+				}
+			%>
+		</div>
+		<hr>
+		<div align="center" style="margin-top: 100px">
+
+			<!-- 큰 이미지 -->
+<div class="firstbox">
+			<div class="img1">
+				<img alt="이미지 없음" src="productimg/<%=product.getFilename()%>"
+					width="400px" height="545px">
+			</div>
+
+			<!-- 상품 이름 -->
+
+			<div class="div1" style="border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;">
+			<br>
+				<h2><%=product.getP_name()%></h2>
+				<%if(product.getP_readcount()>= 1){
+				%>
+				<p style="color: white; font-size: 13px; background: red; width: 200px"><b>주목 폭주</b></p>
+				<%
+			}
+			 %>
+			</div>
+			
+			<!-- 상품 소개 글 -->
+
+			<div class="div2">
+
+				<!-- 금액, 색상, 사이즈 선택, 수량, 결제금액 표기 테이블 -->
+				<form id="selectFrm">
+					<input type="hidden" name="seq" value="<%=product.getSeq()%>">
+					<input type="hidden" name="work" value="purchasego"> <input
+						type="hidden" name="id" value="<%=id%>">
+					<table>
+						<col width="200px">
+						<col width="200px">
+						<tr height="50px">
+							<td>판매 가격</td>
+							<td align="right"><%=product.getP_price()%>원</td>
+						</tr>
+						<tr height="50px">
+							<td>색상</td>
+							<td align="right"><select name="color">
+									<option>색상 선택</option>
+									<option>White</option>
+									<option>Black</option>
+							</select>
+						</tr>
 						<%
-					}
-					 %>
-					</div>
-					
-					<!-- 상품 소개 글 -->
-
-					<div class="div2">
-
-						<!-- 금액, 색상, 사이즈 선택, 수량, 결제금액 표기 테이블 -->
-						<form id="selectFrm">
-							<input type="hidden" name="seq" value="<%=product.getSeq()%>">
-							<input type="hidden" name="work" value="purchasego"> <input
-								type="hidden" name="id" value="<%=id%>">
-							<table>
-								<col width="200px">
-								<col width="200px">
-								<tr height="50px">
-									<td>판매 가격</td>
-									<td align="right"><%=product.getP_price()%>원</td>
-								</tr>
-								<tr height="50px">
-									<td>색상</td>
-									<td align="right"><select name="color">
-											<option>색상 선택</option>
-											<option>White</option>
-											<option>Black</option>
-									</select>
-								</tr>
-								<%
-									if ((product.getP_category().equals("top")) || (product.getP_category().equals("bottom"))) {
+							if ((product.getP_category().equals("top")) || (product.getP_category().equals("bottom"))) {
+						%>
+						<tr height="50px">
+							<td>사이즈</td>
+							<td align="right"><select name="size">
+									<option>사이즈 선택</option>
+									<option>S</option>
+									<option>M</option>
+									<option>XL</option>
+									<option>XXL</option>
+							</select>
+						</tr>
+						<%
+							} else if((product.getP_category().equals("shoes"))){
+						%>
+						<tr height="50px">
+							<td>사이즈</td>
+							<td align="right"><select name="size">
+									<option>사이즈 선택</option>
+									<option>220</option>
+									<option>230</option>
+									<option>240</option>
+									<option>250</option>
+									<option>260</option>
+									<option>270</option>
+									<option>280</option>
+							</select>
+						</tr>
+						<%
+							}else{
 								%>
 								<tr height="50px">
-									<td>사이즈</td>
-									<td align="right"><select name="size">
-											<option>사이즈 선택</option>
-											<option>S</option>
-											<option>M</option>
-											<option>XL</option>
-											<option>XXL</option>
-									</select>
-								</tr>
+							<td>사이즈</td>
+							<td align="right"><select name="size">
+									<option>사이즈 선택</option>
+									<option>Free</option>
+							</select>
+						</tr>
 								<%
-									} else if((product.getP_category().equals("shoes"))){
-								%>
-								<tr height="50px">
-									<td>사이즈</td>
-									<td align="right"><select name="size">
-											<option>사이즈 선택</option>
-											<option>220</option>
-											<option>230</option>
-											<option>240</option>
-											<option>250</option>
-											<option>260</option>
-											<option>270</option>
-											<option>280</option>
-									</select>
-								</tr>
-								<%
-									}else{
-										%>
-										<tr height="50px">
-									<td>사이즈</td>
-									<td align="right"><select name="size">
-											<option>사이즈 선택</option>
-											<option>Free</option>
-									</select>
-								</tr>
-										<%
-									}
-								%>
-								<tr height="50px">
-									<td>배송 방법 / 배송료</td>
-									<td align="right">국내 / 무료</td>
-								</tr>
-								<tr height="50px" style="border-bottom: 1px solid lightgray;">
-									<td>수량 선택</td>
-									<td align="right">
-									<button type="button" id="min" style="background: none; border: none; outline: none;"><b>-</b></button>
-									<input type="text" id="pcount"
-										name="buy_count" readonly="readonly" value="1" size="6"
-										style="text-align: center; border: none;">
-										<button type="button" id="plus" style="background: none; border: none; outline: none;"><b>+</b></button>
-										</td>
-								</tr>
-								<tr height="50px">
-									<td>총 결제금액</td>
-									<td align="right"><input type="text" id="totalprice"
-										name="totalprice" readonly="readonly"
-										style="text-align: right; border: none;">
-									<td>
-								</tr>
-							</table>
-						</form>
-					</div>
+							}
+						%>
+						<tr height="50px">
+							<td>배송 방법 / 배송료</td>
+							<td align="right">국내 / 무료</td>
+						</tr>
+						<tr height="50px" style="border-bottom: 1px solid lightgray;">
+							<td>수량 선택</td>
+							<td align="right">
+							<button type="button" id="min" style="background: none; border: none; outline: none;"><b>-</b></button>
+							<input type="text" id="pcount"
+								name="buy_count" readonly="readonly" value="1" size="6"
+								style="text-align: center; border: none;">
+								<button type="button" id="plus" style="background: none; border: none; outline: none;"><b>+</b></button>
+								</td>
+						</tr>
+						<tr height="50px">
+							<td>총 결제금액</td>
+							<td align="right"><input type="text" id="totalprice"
+								name="totalprice" readonly="readonly"
+								style="text-align: right; border: none;">
+							<td>
+						</tr>
+					</table>
+				</form>
+			</div>
 
-					<!-- 구매 버튼 -->
+			<!-- 구매 버튼 -->
 
-					<div class="div2">
-						<button type="button" style="width: 300px; height: 40px; background: #95A5A6; color: white; border: none;"
-							id="purchase_btn"><b>구매하기</b></button>
-					</div>
+			<div class="div2">
+				<button type="button" style="width: 300px; height: 40px; background: #95A5A6; color: white; border: none;"
+					id="purchase_btn"><b>구매하기</b></button>
+			</div>
 
-					<!-- 장바구니 버튼 -->
+			<!-- 장바구니 버튼 -->
 
-					<div class="div3" style="border-bottom: 1px solid lightgray;">
-						<button type="button" style="width: 300px; height: 40px; background: #000000; color: white; border: none;"
-							id="cart_btn"><b>장바구니</b></button>
-					</div>
-						
-					<!-- 카테고리별 전체 상품 리스트 출력 -->
+			<div class="div3" style="border-bottom: 1px solid lightgray;">
+				<button type="button" style="width: 300px; height: 40px; background: #000000; color: white; border: none;"
+					id="cart_btn"><b>장바구니</b></button>
+			</div>
+</div>				
+			<!-- 카테고리별 전체 상품 리스트 출력 -->
 
-					<section class="category_section">
-						<div class="container">
-						<div style="margin-left: 100px;">
-							<div class="row some-cards">
-								<button type="button" onclick="display(1)"
-									style="background: none; border: none; outline: none;">◀</button>
-								<%
-									for (int i = 0; i < prolist.size(); i++) {
-									ProductDto dto = prolist.get(i);
-								%>
-								<div class="box">
-									<a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
-										<div class="img-box">
-											<img src="productimg/<%=dto.getFilename()%>" alt="">
-										</div>
-									</a>
-									<%=dto.getP_price()%>원<br><%=dto.getP_name()%>
+			<section class="category_section">
+				<div class="container">
+				<div style="padding: 15px; margin-left: 50px;">
+					<div class="row some-cards">
+						<button type="button" onclick="display(1)"
+							style="background: none; border: none; outline: none;">◀</button>
+						<%
+							for (int i = 0; i < prolist.size(); i++) {
+							ProductDto dto = prolist.get(i);
+						%>
+						<div class="box">
+							<a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
+								<div class="img-box">
+									<img src="productimg/<%=dto.getFilename()%>" alt="">
 								</div>
-								<%
-									}
-								%>
-								<button type="button" onclick="display(2)" id="dp"
-									style="background: none; border: none; outline: none;">▶</button>
-							</div>
-						  </div>
+							</a>
+							<%=dto.getP_price()%>원<br><%=dto.getP_name()%>
 						</div>
-					</section>
-
-					<!-- 버튼을 누르면 해당 내용 표기-->
-
-					<div style="width: 680px; height: 70px; margin-top: 30px; ">
-						<ul class="detailInfo">
-							<li><button type="button" id="product_d">상품 상세 정보</button></li>
-							<li><button type="button" id="review">구매 후기</button></li>
-							<li><button type="button" id="commonInfo">상품 구매 안내</button></li>
-						</ul>
+						<%
+							}
+						%>
+						<button type="button" onclick="display(2)" id="dp"
+							style="background: none; border: none; outline: none;">▶</button>
 					</div>
-					<div id="product_Detail"
-						style="width: 900px; margin-top: 50px; padding: 50px;">
+				  </div>
+				</div>
+			</section>
 
-						<!-- 상품의 소개 글 -->
+			<!-- 버튼을 누르면 해당 내용 표기-->
 
-						<div style="width: 400px;">
-							<h3>COMMENT</h3>
-							<span><%=product.getP_info()%></span>
-						</div>
-						<h2>PRODUCT INFO</h2>
+			<div style="width: 680px; height: 70px; margin-top: 30px; ">
+				<ul class="detailInfo">
+					<li><button type="button" id="product_d"><b>상품 상세 정보</b></button></li>
+					<li><button type="button" id="review"><b>구매 후기</b></button></li>
+					<li><button type="button" id="commonInfo"><b>상품 구매 안내</b></button></li>
+				</ul>
+			</div>
+			<div id="product_Detail"
+				style="width: 900px; margin-top: 50px; padding: 50px;">
 
-						<!-- 작은 이미지 -->
+				<!-- 상품의 소개 글 -->
 
-						<div style="width: 200px; height: 300px; margin-top: 50px; box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3)"  >
-							<img alt="이미지 없음" src="productimg/<%=product.getFilename()%>"
-								style="position: absolute; width: 200px; height: 300px; margin-left: -100px;">
-						</div>
+				<div style="width: 400px;">
+					<h3>COMMENT</h3>
+					<span><%=product.getP_info()%></span>
+				</div><br><br>
+				<h2>PRODUCT INFO</h2>
 
-						<!-- 상품 상세 정보 -->
+				<!-- 작은 이미지 -->
 
-						<div style="margin-top: 50px;">
-							<table class="tb2">
-								<col width="120px">
-								<col width="180px">
-								<col width="120px">
-								<col width="180px">
-								<tr>
-									<th>소재</th>
-									<td><%=product.getP_material()%></td>
-									<th>색상</th>
-									<td>상세 참조</td>
-								</tr>
-								<tr>
-									<th>제조국</th>
-									<td><%=product.getP_madeIn()%></td>
-									<th>제조년월</th>
-									<td>판매일 2개월 이내</td>
-								</tr>
-								<tr>
-									<th>품질보증기간</th>
-									<td>교환/반품 안내 참조</td>
-									<th>A/S[판매처]</th>
-									<td>SIMPLE FIVE</td>
-								</tr>
-							</table>
-						</div>
+				<div style="width: 200px; height: 300px; margin-top: 50px; box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3)"  >
+					<img alt="이미지 없음" src="productimg/<%=product.getFilename()%>"
+						style="position: absolute; width: 200px; height: 300px; margin-left: -100px;">
+				</div>
+
+				<!-- 상품 상세 정보 -->
+
+				<div style="margin-top: 50px;">
+					<table class="tb2">
+						<col width="120px">
+						<col width="180px">
+						<col width="120px">
+						<col width="180px">
+						<tr>
+							<th>소재</th>
+							<td><%=product.getP_material()%></td>
+							<th>색상</th>
+							<td>상세 참조</td>
+						</tr>
+						<tr>
+							<th>제조국</th>
+							<td><%=product.getP_madeIn()%></td>
+							<th>제조년월</th>
+							<td>판매일 2개월 이내</td>
+						</tr>
+						<tr>
+							<th>품질보증기간</th>
+							<td>교환/반품 안내 참조</td>
+							<th>A/S[판매처]</th>
+							<td>SIMPLE FIVE</td>
+						</tr>
+					</table>
+				</div>
 						<%
 							if (product.getP_category().equals("top")) {
 						%>
 						<div style="margin-top: 50px;">
 							<img alt="" src="./img/size1.png" width="700px">
+						</div>
+						<div style="margin-top: 50px;">
+							<img alt="" src="./img/info.png" width="700px">
 						</div>
 
 						<%
@@ -423,8 +391,29 @@ if (session.getAttribute("login_Dto") != null) {
 						%>
 						<div style="margin-top: 50px;">
 							<img alt="" src="./img/size2.png" width="700px">
+						</div >
+							<div style="margin-top: 50px;">
+							<img alt="" src="./img/info.png" width="700px">
 						</div>
 						<%
+							}else if(product.getP_category().equals("shoes")){
+								%>
+								<div style="margin-top: 50px;">
+									<img alt="" src="./img/size3.png" width="700px">
+								</div>
+								<%
+							}else if(product.getP_category().equals("accessary")){
+								%>
+								<br><br>
+								<h5 style="color: red"><b>Tip</b></h5>
+								<ul style="list-style-type: none;">
+									<li>① 비닐팩에 하나씩 밀봉하여 보관하시길 권장합니다.	</li>
+									<li>② 금속의경우 융원단으로 닦아주면 약간의 변색을 방지 할 수 있습니다.	</li>
+									<li>③ 직사광선, 영하권 온도와 같이 온도차가 심한 곳에서는 착용/보관에 유의해 주세요.</li>
+									<li>④ 모든 액세서리류 제품은 피부에서 배출되는 땀, 물과 빛의 접촉, 장기간 착용 등 환경에 따른 자연스러운 변색의 요인이 될 수 있으니 착용/보관에 유의해 주세요.</li>
+									<li>⑤ 알러지, 아토피 등 민감성 피부의 고객님들께선 구매 시 유의해 주세요.</li>
+								</ul>
+								<%
 							}
 						%>
 
@@ -434,18 +423,22 @@ if (session.getAttribute("login_Dto") != null) {
 
 					<div id="review_detail"
 						style="width: 900px; margin-top: 50px; padding: 50px;">
+						<div align="left" style="padding-left : 70px; padding-bottom: 20px;">
+						<h4>Review</h4>
+						</div>
 						<table id="reviewTb"">
+							<col width="100px">
 							<col width="500px">
 							<col width="100px">
 							<tr id="tableheader">
-								<th>리뷰 제목</th>
-								<th>작성자</th>
+								<th colspan="2">Title</th>
+								<th>Id</th>
 							</tr>
 							<%
 								if (list.size() == 0 || list == null) {
 							%>
 							<tr class="rvf">
-								<td colspan='2'>작성된 글이 없습니다.</td>
+								<td colspan='3'>작성된 글이 없습니다.</td>
 							</tr>
 
 							<%
@@ -453,7 +446,8 @@ if (session.getAttribute("login_Dto") != null) {
 								for (int i = 0; i < list.size(); i++) {
 							%>
 							<tr class="rvf">
-								<td><%=list.get(i).getContents()%></td>
+								<td><img src="./img/star.png"></td>
+								<td style="padding-left: 20px;"><%=list.get(i).getContents()%></td>
 								<td align='center'><%=list.get(i).getId()%></td>
 							</tr>
 							<%
@@ -510,14 +504,19 @@ if (session.getAttribute("login_Dto") != null) {
 
 						<div>
 							<br>
-							<div>
-								<textarea rows='3' cols='50' id='revContent'></textarea>
+							<div align="left" style="padding-left : 70px; padding-bottom: 20px;">
+							<h6><b>Review 등록</b></h6>
 							</div>
-							<div>
-								<button type='button' id='review_btn'
-									style="width: 50px; height: 50px">등록</button>
-							</div>
-							<br> <span id="block"></span>
+							<table>
+							<col width="600px">
+								<tr>
+									<td><textarea rows='3' cols='80' id='revContent'></textarea></td>
+									<td><button type='button' id='review_btn'
+									style="width: 60px; height: 75px">등록</button></td>
+								</tr>
+								
+							</table>
+							
 						</div>
 					</div>
 
@@ -526,8 +525,8 @@ if (session.getAttribute("login_Dto") != null) {
 					<div id="common_Detail"
 						style="width: 900px; margin-top: 50px; padding: 50px;">
 						<div align="left" style="box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3); padding: 40px;">
+						<h2><b>교환 및 반품안내</b></h2><br>
 							<ul>
-								<li style="list-style-type: none;">교환 및 반품안내</li>
 								<li>상품 택(tag) 제거 또는 개봉으로 상품 가치 훼손 시에는 상품수령 후 7일 이내라도 교환 및
 									반품이 불가능합니다.</li>
 								<li>저단가 상품, 일부 특가 상품은 고객 변심에 의한 교환, 반품은 고객께서 배송비를 부담하셔야
@@ -551,9 +550,7 @@ if (session.getAttribute("login_Dto") != null) {
 								<li>무료배송으로 받으신 상품의 교환/반품의 경우 왕복택배비용 5,000원을 부담해 주셔야 합니다.</li>
 								<li>교환 및 반품 접수 시 구매번호 및 고객님의 회원아이디를 알려 주시면 빠른 처리가 가능합니다.</li>
 							</ul>
-							<ul>
-								<li style="list-style-type: none;"></li>
-							</ul>
+							
 						</div>
 
 						<div>
@@ -766,7 +763,8 @@ $(function() {
 					$.each(rlist,function(i, val){
 					let addlist = "";
 						addlist = "<tr class='rvf'>"
-									+	"<td>"
+									+	"<td><img src='./img/star.png'></td>"
+									+	"<td style='padding-left: 20px;'>"
 									+	val.contents
 									+	"</td>"
 									+	"<td align='center'>"+val.id+"</td>"
@@ -832,7 +830,7 @@ function display(num) {
 		}
 		
 	}else{
-		listNum ++;
+		listNum++;
 	}
 		$.ajax({
 			url:"productDetail",
@@ -886,7 +884,8 @@ function page(cp) {
 			$.each(rlist,function(i, val){
 			let addlist = "";
 				addlist = "<tr class='rvf'>"
-							+	"<td>"
+							+	"<td><img src='./img/star.png'></td>"
+							+	"<td style='padding-left: 20px;'>"
 							+	val.contents
 							+	"</td>"
 							+	"<td align='center'>"+val.id+"</td>"
@@ -956,7 +955,8 @@ $(document).on("click", "#p_btn",function() {
 			$.each(rlist,function(i, val){
 			let addlist = "";
 				addlist = "<tr class='rvf'>"
-							+	"<td>"
+							+	"<td><img src='./img/star.png'></td>"
+							+	"<td style='padding-left: 20px;'>"
 							+	val.contents
 							+	"</td>"
 							+	"<td align='center'>"+val.id+"</td>"
@@ -1029,7 +1029,8 @@ $(document).on("click", "#n_btn",function() {
 			$.each(rlist,function(i, val){
 			let addlist = "";
 				addlist = "<tr class='rvf'>"
-							+	"<td>"
+							+	"<td><img src='./img/star.png'></td>"
+							+	"<td style='padding-left: 20px;'>"
 							+	val.contents
 							+	"</td>"
 							+	"<td align='center'>"+val.id+"</td>"

@@ -39,8 +39,7 @@ if(session.getAttribute("login_Dto") != null){
 	   login_Dto = (MemberDto)session.getAttribute("login_Dto");
 	   id = login_Dto.getId(); auth = login_Dto.getAuth();
 	   name = login_Dto.getName();
-}  
-
+} 
 %>    
 <!DOCTYPE html>
 <html>
@@ -48,9 +47,9 @@ if(session.getAttribute("login_Dto") != null){
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="./productDetail.css" type="text/css">
 <!-- bootstrap core css -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 <!--slick slider stylesheet -->
@@ -63,11 +62,20 @@ if(session.getAttribute("login_Dto") != null){
 <!-- Custom styles for this template -->
 <link href="css/style.css" rel="stylesheet" />
 <!-- 결제 라이브러리 -->
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <style type="text/css">
+  .pay_section .btn_area{
+	width: 200px;
+	height: 60px;
+	margin-left: 400px;
+	
+}
+  </style>
 </head>
-<body>
-<div class="main_body_content">
-		<div class="hero_area">
+<body class="sub_page">
+  <div class="main_body_content">
+    <div class="hero_area">
 
 			<!-- 헤더 -->
 			<header class="header_section">
@@ -139,13 +147,30 @@ if(session.getAttribute("login_Dto") != null){
 				</div>
 			</header>
 			<!-- 헤더 끝 -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+<!-- 결제페이지 시작 -->		
+<section class="pay_section layout_padding">
+   <div class="container_padding">
+			
+			
 
-<main style="margin-left: 200px">
-	<div>
-		<h2>주문상품</h2>
+
+<!-- 주문상품 -->
+<!-- <main style="margin-left: 200px"> -->
+	<div class="h2_padding">
+		<h2>주문 상품</h2>
 	</div>
+	
 	<div>
-		<table border="1px solid" style="text-align: center;">
+		<table class="pay_table">
 		<col width="150px"><col width="300px"><col width="100px"><col width="150px"><col width="150px">
 			<tr>
 				<th>상품 이미지</th><th>상품정보</th><th>수량</th><th>상품금액</th><th>총 상품금액</th>		
@@ -154,16 +179,10 @@ if(session.getAttribute("login_Dto") != null){
 			if(cartlist.size()==0 || cartlist==null){
 			%>
 			<tr>
-				<td><img alt="이미지 없음" src="productimg/<%=dto.getFilename()%>" width="50px" height="70px"></td>
+				<td><img alt="이미지 없음" src="productimg/<%=dto.getFilename()%>"></td>
 				<td>
-					<table style="font-size: 14px">
-						<tr>
-							<td align="center"><%=dto.getP_name() %></td>
-						</tr>
-						<tr>
-							<td>사이즈 : <%=size %> / </td><td>색상 : <%=color %></td>
-						</tr>
-					</table>
+							<%=dto.getP_name() %><br>
+							사이즈 : <%=size %> / 색상 : <%=color %>
 				</td>
 				<td><%=buy_count %>개</td>
 				<td><%=dto.getP_price() %></td>
@@ -179,16 +198,12 @@ if(session.getAttribute("login_Dto") != null){
 					cartDto cart = cartlist.get(i);
 					%>
 					<tr>
-						<td><img alt="이미지 없음" src="productimg/<%=cart.getFilename()%>" width="50px" height="70px"></td>
-						<td><table style="font-size: 14px">
-							<tr>
-								<td align="center"><%=cart.getItem_name() %></td>
-							</tr>
-							<tr>
-								<td>사이즈 : <%=cart.getSize() %> / </td><td>색상 : <%=cart.getColor() %></td>
-							</tr>
-						</table></td>
-						<td><%=cart.getQty() %> 개</td><td><%=cart.getItem_price() %> 원</td><td><%=cart.getQty()*cart.getItem_price() %> 원</td>
+						<td><img alt="이미지 없음" src="productimg/<%=cart.getFilename()%>"></td>
+						<td>
+							<%=cart.getItem_name() %><br>
+							사이즈 : <%=cart.getSize() %> / 색상 : <%=cart.getColor() %>
+						</td>
+						<td><%=cart.getQty() %> 개</td><td><%=cart.getItem_price() %>원</td><td><%=cart.getQty()*cart.getItem_price() %> 원</td>
 					</tr>
 					<% 	
 					totalPrice = totalPrice + (cart.getQty()*cart.getItem_price());
@@ -202,41 +217,57 @@ if(session.getAttribute("login_Dto") != null){
 			%>
 		</table>
 	</div>
-	<div style="margin-top: 70px">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 주문자 정보 -->
+	<div class="h2_padding">
 		<h2>주문자 정보</h2>
 	</div>
 	<div>
-		<table border="1px solid">
-		<col width="150px"><col width="300px"><col width="100px">
+		<table class="payadd_table"> 
+		<col width="250px"><col width="450px"><col width="150px">
 			<tr>
 				<th>주문 하시는분</th><td colspan="2">
 				<%
 				if(login_Dto != null){
 					%>
-					<input type="text" size="50" name="recName" value="<%=name%>">
+					<input type="text" size="50" class="form-area" name="recName" value="<%=name%>">
 					<%
 				}else{
 					%>
-					<input type="text" size="50" name="recName">
+					<input type="text" size="50" class="form-area" name="recName">
 					<%
 				}
 				%>
 				</td>
 			</tr>		
-			<tr>
-				<th>연락처</th><td colspan="2"><select name="phoNum1">
+			<tr class="pay_tr">
+				<th>연락처</th><td colspan="2"><select name="phoNum1" class="form-area-call">
 									<option value="010">010</option>
 									<option value="011">011</option>
 									<option value="017">017</option>
 									<option value="019">019</option>
 								</select>
 				
-				-<input type="text" size="10" name="phoNum2" maxlength="4">-<input type="text" size="10" name="phoNum3" maxlength="4"></td>
+				-
+				<%
+				if(login_Dto != null)
+				%>
+				<input type="text" name="phoNum2" maxlength="4" class="form-area-call"> - <input type="text" name="phoNum3" maxlength="4" class="form-area-call"></td>
 				
 				
 			</tr>
-			<tr>
-				<th>이메일</th><td><input type="text" size="15" id="email1">@<input type="text" size="14" id="emailaddr"></td><td><select id="selemail">
+			<tr class="pay_tr">
+				<th>이메일</th><td><input type="text" id="email1" class="form-area-email"> @ <input type="text" size="10" id="emailaddr" class="form-area-email"></td>
+																	<td><select id="selemail" class="form-area-call">
 																	<option value="">직접 입력</option>
 																	<option value="gmail.com">gmail.com</option>
 																	<option value="naver.com">naver.com</option>
@@ -246,73 +277,102 @@ if(session.getAttribute("login_Dto") != null){
 			</tr>
 		</table>
 	</div>
-	<div style="margin-top: 70px">
+	
+	
+	
+	
+	
+	<div class="h2_padding">
 		<h2>배송지 정보 입력</h2>
 	</div>
 	<div>
 		<input type="checkbox" name="same" id="_same">주문자와 동일
-	</div><br>
+	</div>
+	
+	
 	<div>
-		<table border="1px solid">
+		<table class="payadd_table">
 		<col width="150px"><col width="300px"><col width="100px"><col width="150px"><col width="150px">
-			<tr>
+			<tr class="pay_tr">
 				<td colspan="5"><input type="radio" name="sendwhere" value="do" checked="checked">국내배송 <input type="radio" name="sendwhere" value="ov">해외배송</td>
 			</tr>		
-			<tr>
-				<th>받으시는 분</th><td colspan="2"><input type="text" size="30" name="receiveName"></td>				
+			<tr class="pay_tr">
+				<th>받으시는 분</th><td colspan="4"><input type="text" name="receiveName" class="form-area"></td>				
 			</tr>
-			<tr>
-				<th>연락처</th><td colspan="2"><select name="phoneNum1">
+			<tr class="pay_tr">
+				<th>연락처</th><td colspan="4"><select name="phoneNum1" class="form-area-call">
 									<option value="010">010</option>
 									<option value="011">011</option>
 									<option value="017">017</option>
 									<option value="019">019</option>
 								</select>
 				
-				-<input type="text" size="10" name="phoneNum2" maxlength="4">-<input type="text" size="10" name="phoneNum3" maxlength="4"></td>
+				-<input type="text" name="phoneNum2" maxlength="4" class="form-area-call"> - <input type="text" name="phoneNum3" maxlength="4" class="form-area-call"></td>
 			</tr>
-			<tr>
+			<tr class="pay_tr">
 				<th>배송 주소</th>
-				<td colspan="2"><input type="text" id="sample4_postcode" placeholder="우편번호">
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" size="40"><br>
+				<td colspan="4"><input type="text" id="sample4_postcode" placeholder="우편번호" class="form-area-email">
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="s_btn"><br>
+				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" size="40" class="form-area-address"><br>
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample4_detailAddress" placeholder="상세주소" size="40">
+				<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="form-area-address">
 				</td>
 			</tr>
-			<tr>
-				<th>배송 메세지</th><td colspan="2"><select>
+			<tr class="pay_tr">
+				<th>배송 메세지</th><td colspan=4"><select class="form-area-address">
 										<option>배송 메세지를 선택해주세요</option>
 										<option>배송 전 미리 연락 바랍니다</option>
 										<option>부재시 경비실에 맡겨주세요</option>
 										<option>부재시 문앞에 놓아주세요</option>
 										<option>택배함에 보관해 주세요</option>
-									</select><textarea rows="10" cols="100"></textarea>*주문관련 요청사항은 고객센터 또는 Q&A 게시판을 이용해주세요.</td>
+									</select><textarea rows="10" cols="100" class="form-area"></textarea></td>
 			</tr>
 		</table>
+		<p>*주문관련 요청사항은 고객센터 또는 Q&A 게시판을 이용해주세요</p>
 	</div>
-	<div style="margin-top: 70px">
+	<div class="h2_padding">
 		<h2>결제 선택</h2>
 	</div>
 	<div>
-		<table border="1px solid">
-		<col width="150px"><col width="150px">
-			<tr>
-				<td><input type="radio"name="payway" checked="checked">신용 카드</td>
-			</tr>
-		</table>
+		<input type="radio"name="payway" checked="checked" class="pay_way">신용 카드
 	</div>
-	<div style="width: 600px; margin-top: 70px">
+	<div class="h2_padding">
 		<h2>주문자 동의</h2>
 		<input type="checkbox" name="checkpay">상기 결제정보를 확인하였으며, 구매진행에 동의합니다.
 	</div>		
 	
-</main>
-	<div align="center" style="margin-top: 100px">
-		<button type="button" style="width: 200px; height: 60px" id="p_btn">결제 하기</button>
+<!-- </main> -->
+	<div class="btn_area">
+		<button type="button" id="p_btn" class="p_btn">결제 하기</button>
 	</div>	
-	<!-- 바닥 글 -->
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+</section>
+	
+	<!-- 결제페이지 끝 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 바닥 글 -->
 	<div style="margin-top: 70px">
 		<section class="info_section layout_padding2">
 			<div class="container">
@@ -434,8 +494,7 @@ $(document).ready(function() {
 			let phoneNum = $("select[name='phoNum1']").val()+ $("input[name='phoNum2']").val()+$("input[name='phoNum3']").val();
 			let addr = $("#sample4_roadAddress").val()+$("#sample4_detailAddress").val();
 			let postcode = $("#sample4_postcode").val()
-		
-			<%-- var IMP = window.IMP; // 생략해도 괜찮습니다.
+			var IMP = window.IMP; // 생략해도 괜찮습니다.
 	  		IMP.init("imp80934065"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 	  		
 	  	// IMP.request_pay(param, callback) 호출
@@ -456,20 +515,22 @@ $(document).ready(function() {
 	  	    		var msg = '결제가 완료되었습니다.';
 	  	    		msg += '\n고유ID : ' + rsp.imp_uid;
 	  	    		msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	  	    		msg += '\결제 금액 : ' + rsp.paid_amount;
-	  	    		msg += '카드 승인번호 : ' + rsp.apply_num;
-
+	  	    		msg += '\n결제 금액 : ' + rsp.paid_amount;
+					var isS = true;
 	  	   
 	  	    } else {
 	  	    	var msg = '결제에 실패하였습니다.';
-	  	    	msg += '에러내용 : ' + rsp.error_msg;
-	  	        
+	  	    	msg += '\n에러내용 : ' + rsp.error_msg;
+	  	        var isS = false;
 	  	       
 	  	    }
 	  	  alert(msg);
-	  	 
-	  	  });  --%>
-	  	  location.href="purchaseCon?work=buy&id="+"<%=id%>"+"&seq="+"<%=item_seq%>"+"&size="+"<%=size%>"+"&color="+"<%=color%>"+"&count="+"<%=count%>";
+	  	  if(isS){
+	  		location.href="purchaseCon?work=buy&id="+"<%=id%>"+"&seq="+"<%=item_seq%>"+"&size="+"<%=size%>"+"&color="+"<%=color%>"+"&count="+"<%=count%>";
+	  	  }
+	  	
+	  	  });
+	  	  
 		}
 		
 	});

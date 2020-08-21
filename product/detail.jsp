@@ -1,3 +1,4 @@
+<%@page import="dto.MemberDto"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="dto.ProductDto"%>
 <%@page import="java.util.List"%>
@@ -13,10 +14,18 @@ List<ProductDto> list4 = (List<ProductDto>)map.get("listshoes");
 List<ProductDto> list5 = (List<ProductDto>)map.get("listac");
 List<ProductDto> list6 = (List<ProductDto>)map.get("listsell");
 
-System.out.println(list2.get(0).toString());
 
 ProductDto dto = new ProductDto();
 
+
+String id = null;
+int auth = 3;
+MemberDto login_Dto = null;
+if (session.getAttribute("login_Dto") != null) {
+	login_Dto = (MemberDto) session.getAttribute("login_Dto");
+	id = login_Dto.getId();
+	auth = login_Dto.getAuth();
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -60,41 +69,73 @@ ProductDto dto = new ProductDto();
     
      <!-- 헤더 -->
       <header class="header_section">
-        <div class="container-fluid">
-        <!-- 네비게이션 바 -->
-          <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.jsp">
-              Simple Five
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span class=""> </span>
-            </button>
+				<div class="container-fluid">
+					<!-- 네비게이션 바 -->
+					<nav class="navbar navbar-expand-lg custom_nav-container ">
+						<a class="navbar-brand" href="addPro?work=main"> Simple Five </a>
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class=""></span>
+						</button>
+						<div class="collapse navbar-collapse " id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item active"><a class="nav-link"
+									href="addPro?work=main">Main<span class="sr-only"></span></a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="addPro?work=list">카테고리</a></li>
+								<!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+								<li class="nav-item">
+									<div class="dropdown">
+										<p class="dropdown-p">고객센터</p>
+										<div class="dropdown-content">
+											<a href="<%=request.getContextPath()%>/board/qna_main.jsp">Q
+												& A</a> <a href="infomain?work=move">공지사항</a> <a
+												href="suggest?work=suggest&detailwork=suggest_main">건의사항</a>
+											<a href="<%=request.getContextPath()%>/calendar/cal_main.jsp">일정확인</a>
+										</div>
+									</div>
+								</li>
+								<!-- 게시판 이동 끝 -->
 
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link" href="addPro?work=list">카테고리</a>
-                </li>
-                 <li class="nav-item">
-                  <a class="nav-link" href="addPro?work=add">제품 추가(임시)</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="CScenter.jsp">고객센터</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="login.jsp">로그인</a>
-                </li>
-   				<li class="nav-item">
-                  <a class="nav-link" href="register.jsp">회원가입</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </header>
+								<!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
+								<%
+									if (id != null) {
+									if (auth == 1) {
+								%>
+								<li class="nav-item"><a class="nav-link"
+									href="<%=request.getContextPath()%>/admin/admin_main.jsp">관리자페이지</a>
+								</li>
+								<%
+									} else {
+								%>
+								<li class="nav-item"><a class="nav-link"
+									href="login?work=MyPage&id=<%=id%>">My Page</a></li>
+								<%
+									}
+								%>
+								<li class="nav-item"><a class="nav-link"
+									href="login?work=logout">로그아웃</a></li>
+								<%
+									} else {
+								%>
+								<li class="nav-item"><a class="nav-link"
+									href="<%=request.getContextPath()%>/main/login.jsp">로그인</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="<%=request.getContextPath()%>/main/register_agree.jsp">회원가입</a>
+								</li>
+								<%
+									}
+								%>
+								<!-- 로그인 메뉴 끝  -->
+								<li class="nav-item"><a class="nav-link"
+									onclick="cookieRemove()">테스트용 쿠키삭제 </a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</header>
       <!-- 헤더 끝 -->
     </div>
 
@@ -107,7 +148,7 @@ ProductDto dto = new ProductDto();
       <div class="container">
         <div class="heading_container">
           <h2><br><br>
-            Weekly Best Item(판매량순)
+            Weekly Best Item
           </h2>
         </div>
       </div>
